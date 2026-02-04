@@ -172,6 +172,24 @@ function confetti() {
     color: white;
     cursor: pointer;
   }
+  .heart {
+    position: fixed;
+    font-size: 24px;
+    pointer-events: none;
+    animation: floatUp 1.5s ease-out forwards;
+    z-index: 2000;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-80px) scale(1.8);
+      opacity: 0;
+    }
+  }
 </style>
 </head>
 
@@ -213,7 +231,26 @@ function confetti() {
 </section>
 
 <!-- OUR STORY -->
+<!-- OUR STORY WITH PHOTOS -->
 <section class="timeline">
+  <h2 style="font-family:'Great Vibes', cursive; font-size:2.5rem;">Our Story 💑</h2>
+
+  <div class="timeline-item">
+    🌟 Tutorial Class — The day our story quietly began
+    <br><br>
+    <img src="story1.jpg" onclick="heartBurst(event)" style="width:100%; border-radius:10px; margin-top:10px;" />
+  </div>
+
+  <div class="timeline-item">
+    💬 I Texted First — I asked you out immediately
+    <br>
+    You were freaked out and said no… but the next day you said yes ❤️
+    <br><br>
+    <img src="story2.jpg" onclick="heartBurst(event)" style="width:100%; border-radius:10px; margin-top:10px;" />
+  </div>
+
+  <div class="timeline-item">❤️ Romantic, Playful, and Falling Deeper Every Day</div>
+  <div class="timeline-item">🎉 Today — Celebrating You</div>
   <h2>Our Story 💑</h2>
 
   <div class="timeline-item">🌟 The Day We Met — Tutorial Class</div>
@@ -222,25 +259,45 @@ function confetti() {
   <div class="timeline-item">😳 You were freaked out and said no — and I pretended to be cool about it</div>
   <div class="timeline-item">❤️ The Next Day — you said yes, and suddenly everything changed</div>
 </section>
-  
+
 <!-- VIDEO SECTION -->
 <section style="padding:40px 20px; text-align:center;">
-<h2 style="font-family:'Great Vibes', cursive; font-size:2.5rem; margin-bottom:20px;">
-A Moment I’ll Never Forget 🎥❤️
-</h2>
+  <h2 style="font-family:'Great Vibes', cursive; font-size:2.5rem; margin-bottom:20px;">
+    A Moment I’ll Never Forget 🎥❤️
+  </h2>
 
-<video controls playsinline style="
-width: 90%;
-max-width: 600px;
-border-radius: 15px;
-box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-">
-<source src="video.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+  <video controls playsinline style="
+    width: 90%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  ">
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 </section>
 <!-- END VIDEO SECTION -->
-  
+
+<!-- ABOUT HER LETTER + PHOTOS -->
+<section style="padding:40px 20px;">
+  <h2 style="font-family:'Great Vibes', cursive; font-size:2.5rem;">About You ❤️</h2>
+
+  <div style="max-width:900px; margin:30px auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; align-items:center;">
+    <img src="her1.jpg" onclick="heartBurst(event)" style="width:100%; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.3);" />
+
+    <div style="background:rgba(255,255,255,0.9); color:black; padding:25px; border-radius:15px; font-family:'Indie Flower', cursive; font-size:1.3rem;">
+      You are the most beautiful soul I know. Your smile calms my heart, your laughter lights up my darkest days, and your presence makes everything feel right.
+      <br><br>
+      You are kind, strong, playful, romantic, and effortlessly special. Loving you feels natural, easy, and magical — like it was always meant to be.
+      <br><br>
+      This page, this day, and this heart — all of it is yours ❤️
+    </div>
+
+    <img src="her2.jpg" onclick="heartBurst(event)" style="width:100%; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.3);" />
+  </div>
+</section>
+<!-- END ABOUT HER -->
+
 <section class="letter">
   <strong>How It All Began 💌</strong><br><br>
   It started in a tutorial class — a simple place that turned into the beginning of our forever. Our first conversation was easy, playful, and filled with a spark I couldn’t ignore.
@@ -331,7 +388,21 @@ function openModal(src) {
 function closeModal() {
   document.getElementById('imageModal').style.display = 'none';
 }
-</script>
+function heartBurst(e) {
+  for (let i = 0; i < 6; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
 
+    heart.style.left = e.clientX + Math.random() * 20 - 10 + 'px';
+    heart.style.top = e.clientY + Math.random() * 20 - 10 + 'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1500);
+  }
+}
+
+</script>
 </body>
 </html>
