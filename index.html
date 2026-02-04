@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Birthday ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&family=Indie+Flower&display=swap" rel="stylesheet">
+
+<!-- Confetti library MUST be closed properly -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+function revealSunflower() {
+  const msg = document.getElementById('sunflowerSurprise');
+  if (!msg) return;
+  msg.style.display = msg.style.display === 'none' ? 'block' : 'none';
+}
+
+function confetti() {
+  if (window.confetti) {
+    window.confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+  }
+}
+</script>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+  }
+
+  .countdown {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px;
+  }
+
+  .polaroid {
+    background: white;
+    padding: 15px 15px 35px 15px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transform: rotate(-2deg);
+    transition: 0.4s;
+    color: black;
+  }
+
+  .polaroid:nth-child(even) {
+    transform: rotate(2deg);
+  }
+
+  .polaroid:hover {
+    transform: scale(1.05) rotate(0deg);
+  }
+
+  .polaroid img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .caption {
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .letter {
+    background: rgba(255,255,255,0.9);
+    color: black;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 15px;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.3rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  .timeline {
+    padding: 40px 20px;
+  }
+
+  .timeline-item {
+    margin: 20px auto;
+    max-width: 500px;
+    background: rgba(255,255,255,0.2);
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .rose {
+    position: fixed;
+    top: -50px;
+    font-size: 24px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+    }
+  }
+
+  #lockScreen {
+    position: fixed;
+    inset: 0;
+    background: #ff9a9e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+  }
+  
+  /* Image expand modal */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+
+  .modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+
+  .modal span {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="lockScreen">
+  <h2>Enter Secret Password 💕</h2>
+  <input id="password" type="password" placeholder="Enter password" />
+  <button onclick="unlock()">Unlock</button>
+  <p id="errorMsg" style="color:white; margin-top:10px; display:none;">❌ Wrong password, try again</p>
+</div>
+
+<audio id="bgMusic" src="aint-no-mountain.mp3" loop></audio>
+
+<header>
+  <h1>Happy Birthday Buggu My Love 💛💝💝💛❤️</h1>
+  <div class="countdown" id="countdown"></div>
+</header
+<section class="gallery">
+  <div class="polaroid">
+    <img src="10-things-i-hate-about-you.jpg" onclick="openModal(this.src)" alt="10 Things I Hate About You" />
+    <div class="caption">10 Things I Hate About You 💕</div>
+  </div>
+
+  <div class="polaroid">
+    <img src="to-all-the-boys.jpg" onclick="openModal(this.src)" alt="To All The Boys I've Loved Before" />
+    <div class="caption">To All The Boys I've Loved Before 💌</div>
+  </div>
+
+  <div class="polaroid">
+    <img src="how-to-lose-a-guy.jpg" onclick="openModal(this.src)" alt="How To Lose A Guy In 10 Days" />
+    <div class="caption">How To Lose A Guy In 10 Days 🌹</div>
+  </div>
+
+  <div class="polaroid">
+    <img src="the-notebook.jpg" onclick="openModal(this.src)" alt="The Notebook" />
+    <div class="caption">The Notebook 💖</div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="timeline">
+  <h2>Our Story 💑</h2>
+
+  <div class="timeline-item">🌟 The Day We Met — Tutorial Class</div>
+  <div class="timeline-item">💬 Our First Conversation — shy smiles, playful energy, and something that just felt right</div>
+  <div class="timeline-item">📱 Our First Text — I texted first and asked you out immediately</div>
+  <div class="timeline-item">😳 You were freaked out and said no — and I pretended to be cool about it</div>
+  <div class="timeline-item">❤️ The Next Day — you said yes, and suddenly everything changed</div>
+</section>
+
+<section class="letter">
+  <strong>How It All Began 💌</strong><br><br>
+  It started in a tutorial class — a simple place that turned into the beginning of our forever. Our first conversation was easy, playful, and filled with a spark I couldn’t ignore.
+  <br><br>
+  Then came the first text. No overthinking, no waiting — I jumped right in and asked you out immediately. You got freaked out (which is honestly adorable), and when you said no, my heart definitely skipped a beat.
+  <br><br>
+  But the very next day, you said yes. And just like that, a brave message turned into the best love story I could’ve ever hoped for.
+  <br><br>
+  Romantic, playful, imperfect — just like us ❤️
+</section>
+
+<section class="letter">My Love,<br><br>Happy Birthday  As your birthday approaches, my heart swells with a joy that knows no bounds. It's a day to celebrate the incredible person you are, the light you bring into my life, and the love we share.
+
+Every moment with you is a treasure, a precious gem I hold close to my heart. Your laughter is a melody that soothes my soul, your smile a sunrise that chases away the shadows. You inspire me to be a better person, to dream bigger, and to love deeper.
+
+On this special day, I wish you all the happiness in the world. May your heart be filled with joy, your days with laughter, and your life with endless love. Happy birthday, my love. I can't wait to celebrate with you and make this day as unforgettable as you are.    ❤️</section>
+
+<section style="padding:40px 20px;">
+  <div id="sunflower" style="font-size:80px; cursor:pointer;" onclick="revealSunflower()">🌻</div>
+  <p id="sunflowerSurprise" style="display:none;">Surpriseeee buggu💛💝 You bring so much joy and laughter into my life, and I cherish every moment we spend together. Your smile brightens my day, and your presence makes everything better. I'm so grateful to have you in my life.
+I hope your birthday is filled with everything that makes you happy. May you be surrounded by love, laughter, and all the things that bring you joy. I can't wait to celebrate with you and make more unforgettable memories together</p>
+</section>
+
+<script>
+function unlock() {
+  const enteredPassword = document.getElementById("password").value;
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (enteredPassword === "baseballfield") {
+    document.getElementById("lockScreen").style.display = "none";
+    errorMsg.style.display = "none";
+    const music = document.getElementById("bgMusic");
+    if (music) music.play().catch(()=>{});
+  } else {
+    errorMsg.style.display = "block";
+  }
+}
+
+const birthday = new Date("Feb 5, 2026 00:00:00").getTime();
+const countdownEl = document.getElementById("countdown");
+
+const timer = setInterval(() => {
+  const now = new Date().getTime();
+  const distance = birthday - now;
+
+  if (distance <= 0) {
+    clearInterval(timer);
+    countdownEl.innerHTML = "🎉 Happy Birthday My Love 🎉";
+    confetti();
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}, 1000);
+
+function createRose() {
+  const rose = document.createElement("div");
+  rose.className = "rose";
+  rose.textContent = "🌹";
+  rose.style.left = Math.random() * 100 + "vw";
+  rose.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  document.body.appendChild(rose);
+  setTimeout(() => rose.remove(), 5000);
+}
+
+setInterval(createRose, 600);
+</script>
+
+<!-- Image Modal -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+  <span>&times;</span>
+  <img id="modalImg" />
+</div>
+
+<script>
+function openModal(src) {
+  const modal = document.getElementById('imageModal');
+  const img = document.getElementById('modalImg');
+  img.src = src;
+  modal.style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('imageModal').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
